@@ -1,0 +1,74 @@
+<section class="content">
+    <div class="container-fluid" id="konten">
+        <div class="row">
+            <div class="col-6">
+                <!-- Default box -->
+                <div class="card">
+                    <div class="card-header">
+                        Get Peserta BPJS
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="form-peserta">
+                            <div class="form-row">
+                                <div class="col-10">
+                                    <input type="number" class="form-control" placeholder="Masukkan NIK Peserta" id="nik" name="nik">
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-info">Kirim</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        Footer
+                    </div>
+                    <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(document).ready(function() {
+        $('#form-peserta').on('submit', function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: 'http://192.168.1.144/dashboard/ApiBpjs/getPeserta',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        iconColor: 'white',
+                        customClass: {
+                            popup: 'colored-toast',
+                        },
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        background: '#3fc3ee',
+                        color: '#ffff',
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: response,
+                    })
+                },
+                error: function(xhr, status, error) {
+                    console.error('Terjadi error:', error);
+                }
+            })
+        });
+    });
+</script>

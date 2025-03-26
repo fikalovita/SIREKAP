@@ -13,7 +13,7 @@ class LaporanPasien extends CI_Controller
     }
     public function index()
     {
-        $data['title'] = 'Laporan Pasien Per Dokter';
+        $data['title'] = 'Laporan Pasien';
         $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar');
         $this->load->view('v_laporan_pasien_perdokter');

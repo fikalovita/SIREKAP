@@ -1,6 +1,5 @@
 <section class="content">
     <div class="container-fluid" id="konten">
-
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#dokter-ranap" type="button" role="tab" aria-controls="dokter-ranap" aria-selected="true">Pasien Ranap</button>
@@ -9,7 +8,7 @@
                 <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#dokter-igd" type="button" role="tab" aria-controls="dokter-igd" aria-selected="false">Pasien IGD</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Meninggal di IGD</button>
+                <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Meninggal</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -40,7 +39,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div method="post">
+                                        <div>
                                             <div class="form-row">
                                                 <div class="col">
                                                     <?php
@@ -107,7 +106,6 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="dokter-igd" role="tabpanel" aria-labelledby="dokter-igd-tab">
-
                 <div class="card">
                     <div class="card-header">
                         Laporan Pasien Per Dokter IGD
@@ -199,9 +197,81 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            Laporan Pasien Meninggal
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8 flex-wrap">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <?php
+                                            $startYear = '2018';
+                                            $endYear = date('Y');
+                                            ?>
+                                            <div class="form-group">
+                                                <select class="form-control" id="tahun3" name="tahun3">
+                                                    <option>--Pilih Tahun--</option>
+                                                    <?php for ($i = $startYear; $i <= $endYear; $i++) : ?>
+                                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <select class="form-control" id="bulan3" name="bulan3">
+                                                    <option>--Pilih Bulan--</option>
+                                                    <option value="01">Januari</option>
+                                                    <option value="02">Februari</option>
+                                                    <option value="03">Maret</option>
+                                                    <option value="04">April</option>
+                                                    <option value="05">Mei</option>
+                                                    <option value="06">Juni</option>
+                                                    <option value="07">Juli</option>
+                                                    <option value="08">Agustus</option>
+                                                    <option value="09">September</option>
+                                                    <option value="10">Oktober</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">Desember</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <select class="form-control" id="lokasi" name="lokasi">
+                                                    <option>--Pilih Lokasi--</option>
+                                                    <option value="01">IGD</option>
+                                                    <option value="02">Ranap</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn btn-info" id="tampil-pasien-meninggal">Tampilkan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            Footer
+                        </div>
+                        <!-- /.card-footer-->
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 </section>
 <script>
@@ -218,12 +288,11 @@
                 }
 
             }
-        })
-
+        });
         $('#tampil-pasien-ranap').on('click', function() {
             tabelLaporanPasien.ajax.reload();
             $('#modalPx').modal('hide');
-        })
+        });
     });
 </script>
 <script>
@@ -239,10 +308,42 @@
                     data.tahun2 = $('#tahun2').val();
                 }
             }
-        })
+        });
         $('#tampil-pasien-igd').on('click', function() {
             tabelLaporanPasien2.ajax.reload();
             $('#modalPx2').modal('hide');
-        })
+        });
+    });
+</script>
+<script>
+    $('#tampil-pasien-meninggal').on('click', function() {
+        let bulan3 = $('#bulan3').val();
+        let tahun3 = $('#tahun3').val();
+
+        $.ajax({
+            url: "<?= base_url('LaporanPasien/pasienMeninggal') ?>",
+            type: "post",
+            data: {
+                bulan3: bulan3,
+                tahun3: tahun3
+            },
+            dataType: "json",
+            success: function(response) {
+                if (response.jmlPxMati > 0) {
+                    Swal.fire({
+                        title: 'Jumlah Pasien Meninggal',
+                        html: `<h1 style="color: red;">${response.jmlPxMati}</h1>`,
+                        icon: 'warning',
+                        iconColor: 'red',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-popup-custom',
+                            title: 'swal2-title-custom',
+                            confirmButton: 'swal2-confirm-custom'
+                        }
+                    });
+                }
+            }
+        });
     });
 </script>

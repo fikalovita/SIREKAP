@@ -1,7 +1,7 @@
 <section class="content">
     <div class="container-fluid" id="konten">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <!-- Default box -->
                 <div class="card">
                     <div class="card-header">
@@ -22,19 +22,46 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalPLab">Filter Tanggal</h5>
+                                    <h5 class="modal-title" id="modalPLab">Filter</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span>&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <div>
-                                        <div class="row">
+                                        <div class="form-row">
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="Pilih Tanggal Awal" name="tglAwal" id="tglAwal">
+                                                <?php
+                                                $startYear = '2018';
+                                                $endYear = date('Y');
+                                                ?>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="tahun4" name="tahun4">
+                                                        <option>--Pilih Tahun--</option>
+                                                        <?php for ($i = $startYear; $i <= $endYear; $i++) : ?>
+                                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                                        <?php endfor ?>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="col">
-                                                <input type="text" class="form-control" placeholder="Pilih Tanggal Akhir" name="tglAkhir" id="tglAkhir">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="bulan4" name="bulan4">
+                                                        <option value="">--Pilih Bulan--</option>
+                                                        <option value="01">Januari</option>
+                                                        <option value="02">Februari</option>
+                                                        <option value="03">Maret</option>
+                                                        <option value="04">April</option>
+                                                        <option value="05">Mei</option>
+                                                        <option value="06">Juni</option>
+                                                        <option value="07">Juli</option>
+                                                        <option value="08">Agustus</option>
+                                                        <option value="09">September</option>
+                                                        <option value="10">Oktober</option>
+                                                        <option value="11">November</option>
+                                                        <option value="12">Desember</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -71,26 +98,6 @@
     </div>
 </section>
 <script>
-    $(function() {
-        $("#tglAwal").datepicker({
-            dateFormat: "yy-mm-dd",
-            changeMonth: true,
-            changeYear: true
-        });
-    });
-    $(function() {
-        $("#tglAkhir").datepicker({
-            dateFormat: "yy-mm-dd",
-            changeMonth: true,
-            changeYear: true
-        });
-    });
-</script>
-<script>
-    $('#tampil-periksa-lab').on('click', function() {
-        $('#modalPLab').modal('hide');
-        dataPeriksalab.ajax.reload();
-    });
     $('#button-export-excel').on('click', function() {
         exportExcel();
         $('#modalPLab').modal('hide');
@@ -100,26 +107,26 @@
     let dataPeriksalab = $('#tabel-periksa-lab').DataTable({
         processing: true,
         serverSide: true,
+        orderable: false,
+        searching: false,
         ajax: {
             url: "<?= base_url('PeriksaLab/dataPeriksaLab') ?>",
             type: "POST",
             data: function(data) {
-                data.tglAwal = $('#tglAwal').val();
-                data.tglAkhir = $('#tglAkhir').val();
+                data.tahun4 = $('#tahun4').val();
+                data.bulan4 = $('#bulan4').val();
             },
-
-            buttons: [{
-                extend: 'excelHtml5',
-                text: 'Export to Excel',
-                title: 'User Data'
-            }]
         }
     })
+    $('#tampil-periksa-lab').on('click', function() {
+        $('#modalPLab').modal('hide');
+        dataPeriksalab.ajax.reload();
+    });
 
     function exportExcel() {
-        let tglAwal1 = $('#tglAwal').val();
-        let tglAkhir2 = $('#tglAkhir').val();
-        if (tglAwal1 == '' && tglAkhir2 == '') {
+        let tahun4 = $('#tahun4').val();
+        let bulan4 = $('#bulan4').val();
+        if (tahun4 == '' && bulan4 == '') {
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -138,7 +145,7 @@
                 title: 'Tanggal Harus di Isi',
             })
         } else {
-            let url = window.location.href = '<?= base_url('PeriksaLab/export_excel/') ?>' + tglAwal1 + '/' + tglAkhir2;
+            let url = window.location.href = '<?= base_url('PeriksaLab/export_excel/') ?>' + tahun4 + '/' + bulan4;
         }
 
     }

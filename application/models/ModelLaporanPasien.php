@@ -13,16 +13,6 @@ class ModelLaporanPasien extends CI_Model
         return $this->db->get();
     }
 
-    public function getDokterDpjpAll()
-    {
-        $this->db->select('dokter.kd_dokter,dokter.nm_dokter');
-        $this->db->from('dokter');
-        $this->db->join('dpjp_ranap', 'dokter.kd_dokter=dpjp_ranap.kd_dokter', 'left');
-        $this->db->where('status', '1');
-        $this->db->group_by('dpjp_ranap.kd_dokter');
-        return $this->db->get();
-    }
-
     public function getPasienInap($kd_dokter, $bulan, $tahun)
     {
         $this->db->select('COUNT(kamar_inap.no_rawat) as jml_px');
@@ -56,12 +46,16 @@ class ModelLaporanPasien extends CI_Model
         $this->db->where('DATE_FORMAT(tgl_registrasi,"%Y-%m")=', '' . $tahun . '-' . $bulan . '');
         $this->db->where('reg_periksa.kd_poli', 'IGDK');
         $this->db->where('reg_periksa.kd_dokter', $kd_dokter);
-        // $this->db->group_by('reg_periksa.kd_dokter');
         return $this->db->get();
     }
 
-    public function getPasienRujukIGD()
+    public function getPasienMatiRanap($bulan3, $tahun3)
     {
-        $this->db->select('count()');
+        $this->db->select('reg_periksa.no_rawat');
+        $this->db->from('reg_periksa');
+        $this->db->join('kamar_inap', 'reg_periksa.no_rawat=kamar_inap.no_rawat', 'inner');
+        $this->db->where('kamar_inap.stts_pulang', 'Meninggal');
+        $this->db->where('DATE_FORMAT(kamar_inap.tgl_keluar,"%Y-%m")=', '' . $tahun3 . '-' . $bulan3 . '');
+        return $this->db->get();
     }
 }

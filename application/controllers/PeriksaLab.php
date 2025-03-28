@@ -28,100 +28,77 @@ class PeriksaLab  extends CI_Controller
 
     public function dataPeriksaLab()
     {
-        $tglAwal = $this->input->post('tglAwal') ?: date('d-m-Y');
-        $tglAkhir = $this->input->post('tglAkhir') ?: date('d-m-Y');
-        $start = $this->input->post('start');
-        $search = $this->input->post('search')['value'];
-        $length = $this->input->post('length');
+        $bulan = $this->input->post('bulan4') ?: '';
+        $tahun = $this->input->post('tahun4') ?: '';
         $draw = $this->input->post('draw');
-        $getPeriksaLab = $this->ModelPemeriksaanLaborat->getPeriksaLab($tglAwal, $tglAkhir, $start, $length)->result();
-        // var_dump($getPeriksaLab);
-        // die();
-        $recordTotal = $this->ModelPemeriksaanLaborat->countPeriksaLab($tglAwal, $tglAkhir, $search)->num_rows();
+
+        if (empty($bulan) || empty($tahun)) {
+            echo json_encode([
+                'draw' => $draw,
+                'recordsTotal' => 0,
+                'recordsFiltered' => 0,
+                'data' => []
+            ]);
+            return;
+        }
+        $start = $this->input->post('start');
+        $length = $this->input->post('length');
+
+        $jns_perawatan_lab = $this->ModelPemeriksaanLaborat->getJnsPerawatan($start, $length)->result();
+        $recordTotal = $this->ModelPemeriksaanLaborat->getJnsPerawatanAll()->num_rows();
 
         $data = [];
-        if (!empty($tglAwal) && !empty($tglAkhir)) {
-            foreach ($getPeriksaLab as $pl) {;
+
+        if ($recordTotal > 0) {
+            foreach ($jns_perawatan_lab as $jnsPerawatanLab) {
+                $periksa_lab = $this->ModelPemeriksaanLaborat->getPeriksaLab($jnsPerawatanLab->kd_jenis_prw, $tahun, $bulan)->result();
                 $row = [];
-                $kode = '<table class="table table-borderless">
-                <tr>
-                <td>' . $pl->kd_jenis_prw . '</td>
-                </tr> 
-                </table>';
-                $detail = '<table class="table table-borderless">
-                    <tr>
-                    <td>' . $pl->nm_perawatan . '</td>
-                    </tr> 
-                </table>';
-                $jml = '<table class="table table-borderless">
-                    <tr>
-                    <td>' . $pl->jml_periksa . '</td>
-                    </tr> 
-                </table>';
-                $pr = '<table class="table table-borderless">
-                    <tr>
-                    <td>' . $pl->lk . '</td>
-                    </tr> 
-                </table>';
-                $lk = '<table class="table table-borderless">
-                    <tr>
-                    <td>' . $pl->perempuan . '</td>
-                    </tr> 
-                </table>';
-                $getDetailPeriksaLab = $this->ModelPemeriksaanLaborat->getDetailPeriksaLab($tglAwal, $tglAkhir, $pl->kd_jenis_prw, $search)->result();
-                if (!empty($tglAwal) && !empty($tglAkhir)) {
-                    foreach ($getDetailPeriksaLab as $value) {
-                        $detail .= '<table class="table table-borderless">  
-                            <tr>
-                            <td>' . $value->pemeriksaan . '</td>
-                            </tr> 
-                        </table>';
-                        $jml .= '<table class="table table-borderless">
-                            <tr>
-                            <td>' . $value->jml_detail . '</td>
-                            </tr> 
-                        </table>';
-                        $pr .= '<table class="table table-borderless">
-                            <tr>
-                            <td>' . $value->lk . '</td>
-                            </tr> 
-                        </table>';
-                        $lk .= '<table class="table table-borderless">
-                            <tr>
-                            <td>' . $value->perempuan . '</td>
-                            </tr> 
-                        </table>';
-                    }
+                $lab = $jnsPerawatanLab->kd_jenis_prw;
+                $lab2 = $jnsPerawatanLab->nm_perawatan . '<br>';
+
+                foreach ($periksa_lab as $periksaLab) {
+                    $lab3 = "<table class='table table-borderless'><tr><td> $periksaLab->jml_periksa</td></tr></table>";
+                    $lab5 = "<table class='table table-borderless'><tr><td>" . (!empty($periksaLab->laki) ? $periksaLab->laki : 0) . "</td></tr></table>";
+                    $lab6 = "<table class='table table-borderless'><tr><td>" . (!empty($periksaLab->perempuan) ? $periksaLab->perempuan : 0) . "</td></tr></table>";
                 }
 
-                $row[] = $kode;
-                $row[] = $detail;
-                $row[] = $jml;
-                $row[] = $pr;
-                $row[] = $lk;
+                $template_lab = $this->ModelPemeriksaanLaborat->getTemplateLab($jnsPerawatanLab->kd_jenis_prw)->result();
+                foreach ($template_lab as $templateLab) {
+                    $lab2 .= "<table class='table table-borderless'><tr><td>$templateLab->Pemeriksaan</td></tr></table>";
+                    $detail_periksa = $this->ModelPemeriksaanLaborat->getDetailPeriksaLab($templateLab->id_template, $bulan, $tahun)->result();
+                    foreach ($detail_periksa as $detailPeriksa) {
+                        $lab3 .= "<table class='table table-borderless'><tr><td>$detailPeriksa->jml_detail</td></tr></table>";
+                        $lab5 .= "<table class='table table-borderless'><tr><td>" . (!empty($detailPeriksa->laki) ? $detailPeriksa->laki : 0) . "</td></tr></table>";
+                        $lab6 .= "<table class='table table-borderless'><tr><td>" . (!empty($detailPeriksa->perempuan) ? $detailPeriksa->perempuan : 0) . "</td></tr></table>";
+                    }
+                }
+                $row[] = $lab;
+                $row[] = $lab2;
+                $row[] = $lab3;
+                $row[] = $lab5;
+                $row[] = $lab6;
                 $data[] = $row;
             }
         }
 
-        $datajson = [
+        $data_json = [
             'draw' => $draw,
             'recordsTotal' => $recordTotal,
             'recordsFiltered' => $recordTotal,
             'data' => $data
         ];
-
-
-
-        echo json_encode($datajson);
+        echo json_encode($data_json);
     }
 
-    public function export_excel($tglAwal1, $tglAkhir2)
+    public function export_excel($tahun, $bulan)
     {
-        $PeriksaLab = $this->ModelPemeriksaanLaborat->excelGetPeriksaLab($tglAwal1, $tglAkhir2)->result();
 
+        set_time_limit(0);
+        ini_set('memory_limit', '-1');
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Periksa_laborat.xlsx"');
+        header('Content-Disposition: attachment;filename="Periksa_laborat_' . $tahun . '_' . $bulan . '.xlsx"');
         header('Cache-Control: max-age=0');
+
         $spreadsheet = new Spreadsheet();
         $activeWorksheet = $spreadsheet->getActiveSheet();
         $activeWorksheet->setCellValue('A1', 'Kode');
@@ -129,25 +106,44 @@ class PeriksaLab  extends CI_Controller
         $activeWorksheet->setCellValue('C1', 'Jumlah Pemeriksaan');
         $activeWorksheet->setCellValue('D1', 'Laki-Laki');
         $activeWorksheet->setCellValue('E1', 'Perempuan');
-        $writer = new Xlsx($spreadsheet);
         $row = 2;
+        $jns_perawataan_lab = $this->ModelPemeriksaanLaborat->getJnsPerawatanAll()->result();
 
-        foreach ($PeriksaLab as $pl) {
-            $activeWorksheet->setCellValue('A' . $row, $pl->kd_jenis_prw);
-            $activeWorksheet->setCellValue('B' . $row, $pl->nm_perawatan);
-            $activeWorksheet->setCellValue('C' . $row, $pl->jml_periksa);
-            $activeWorksheet->setCellValue('D' . $row, $pl->lk);
-            $activeWorksheet->setCellValue('E' . $row, $pl->perempuan);
+        foreach ($jns_perawataan_lab as $jnsPerawatanLab) {
+            $activeWorksheet->setCellValue('A' . $row, $jnsPerawatanLab->kd_jenis_prw);
+            $activeWorksheet->setCellValue('B' . $row, $jnsPerawatanLab->nm_perawatan);
 
-            $getDetailPeriksaLab = $this->ModelPemeriksaanLaborat->getDetailPeriksaLab($tglAwal1, $tglAkhir2, $pl->kd_jenis_prw)->result();
+            $periksa_lab = $this->ModelPemeriksaanLaborat->getPeriksaLab($jnsPerawatanLab->kd_jenis_prw, $tahun, $bulan)->result();
+            if (!empty($periksa_lab)) {
+                foreach ($periksa_lab as $periksaLab) {
+                    $activeWorksheet->setCellValue('C' . $row, $periksaLab->jml_periksa);
+                    $activeWorksheet->setCellValue('D' . $row, (!empty($periksaLab->laki) ? $periksaLab->laki : 0));
+                    $activeWorksheet->setCellValue('E' . $row, (!empty($periksaLab->perempuan) ? $periksaLab->perempuan : 0));
+                }
+            } else {
+                $activeWorksheet->setCellValue('C' . $row, 0);
+                $activeWorksheet->setCellValue('D' . $row, 0);
+                $activeWorksheet->setCellValue('E' . $row, 0);
+            }
             $row++;
-            foreach ($getDetailPeriksaLab as $detail) {
-                $activeWorksheet->setCellValue('A' . $row, $detail->kd_jenis_prw);
-                $activeWorksheet->setCellValue('B' . $row, $detail->pemeriksaan);
-                $activeWorksheet->setCellValue('C' . $row, $detail->jml_detail);
-                $activeWorksheet->setCellValue('D' . $row, $detail->lk);
-                $activeWorksheet->setCellValue('E' . $row, $detail->perempuan);
-                $row++;
+
+            $template_lab = $this->ModelPemeriksaanLaborat->getTemplateLab($jnsPerawatanLab->kd_jenis_prw)->result();
+            foreach ($template_lab as $templateLab) {
+                $activeWorksheet->setCellValue('B' . $row, $templateLab->Pemeriksaan);
+                $detail_periksa = $this->ModelPemeriksaanLaborat->getDetailPeriksaLab($templateLab->id_template, $bulan, $tahun)->result();
+                if (!empty($detail_periksa)) {
+                    foreach ($detail_periksa as $detailPeriksa) {
+                        $activeWorksheet->setCellValue('C' . $row, $detailPeriksa->jml_detail);
+                        $activeWorksheet->setCellValue('D' . $row, (!empty($detailPeriksa->laki) ? $detailPeriksa->laki : 0));
+                        $activeWorksheet->setCellValue('E' . $row, (!empty($detailPeriksa->perempuan) ? $detailPeriksa->perempuan : 0));
+                        $row++;
+                    }
+                } else {
+                    $activeWorksheet->setCellValue('C' . $row, 0);
+                    $activeWorksheet->setCellValue('D' . $row, 0);
+                    $activeWorksheet->setCellValue('E' . $row, 0);
+                    $row++;
+                }
             }
         }
 

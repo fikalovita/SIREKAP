@@ -201,7 +201,7 @@ class ObatPerDokterRanap extends CI_Controller
 		$activeWorksheet->setCellValue('G1', 'Biaya Obat');
 		$activeWorksheet->setCellValue('H1', 'Embalase');
 		$activeWorksheet->setCellValue('I1', 'Tuslah');
-		$writer = new Xlsx($spreadsheet);
+		// $writer = new Xlsx($spreadsheet);
 		$row = 2;
 		$no = 1;
 		$dataDokter = $this->ModelObatRalan->getDokter()->result();

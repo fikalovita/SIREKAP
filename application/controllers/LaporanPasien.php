@@ -77,5 +77,11 @@ class LaporanPasien extends CI_Controller
         ];
         echo json_encode($datajson);
     }
-    public function StatusPelayananPasien() {}
+    public function pasienMeninggal()
+    {
+        $bulan3 = $this->input->post('bulan3');
+        $tahun3 = $this->input->post('tahun3');
+        $jumlahPxMati = $this->ModelLaporanPasien->getPasienMatiRanap($bulan3, $tahun3)->num_rows();
+        echo json_encode(['jmlPxMati' => $jumlahPxMati]);
+    }
 }

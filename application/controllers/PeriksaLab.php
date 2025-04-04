@@ -92,7 +92,6 @@ class PeriksaLab  extends CI_Controller
 
     public function export_excel($tahun, $bulan)
     {
-
         set_time_limit(0);
         ini_set('memory_limit', '-1');
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

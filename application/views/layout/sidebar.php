@@ -136,6 +136,15 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('RekapanDekubitus') ?>" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>
+                Rekap Dekubitus
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-chart-line"></i>
               <p>

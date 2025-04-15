@@ -11,6 +11,9 @@ class RekapanDekubitus extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ModelDekubitus');
+        if (!$this->session->userdata('isLogin')) {
+            redirect('Auth');
+        }
     }
 
     public function index()
@@ -23,7 +26,8 @@ class RekapanDekubitus extends CI_Controller
     }
 
     //MENAMPILKAN DATA PENILAIAN DEKUBITUS
-    public function tampilanPenilaianDekubitus(){
+    public function tampilanPenilaianDekubitus()
+    {
         $tanggal1 = $this->input->post('tanggal1');
         $tanggal2 = $this->input->post('tanggal2');
         $start = $this->input->post('start');

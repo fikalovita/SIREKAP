@@ -11,6 +11,9 @@ class RekapanSurveilanceOperasi1 extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ModelSurveilanceOperasi');
+        if (!$this->session->userdata('isLogin')) {
+            redirect('Auth');
+        }
     }
     public function index()
     {

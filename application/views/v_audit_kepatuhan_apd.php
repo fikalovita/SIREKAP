@@ -16,17 +16,19 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="col-6">
-              <div method="POST">
+            <div class="col-12">
+              <div>
                 <div class="row">
-                  <div class="col">
+                  <div class="margin">
                     <input type="text" class="form-control form-control-sm" placeholder="Pilih Tanggal" id="tanggal1" name="tanggal1">
                   </div>
-                  <div class="col">
+                  <div class="btn-group">
                     <input type="text" class="form-control form-control-sm" placeholder="Pilih Tanggal" id="tanggal2" name="tanggal2">
                   </div>
-                  <div class="col">
+                  <div class="btn-group">
                     <button class="btn btn-info btn-sm" id="tampil-audit"><i class="fas fa-eye"></i> Tampilkan</button>
+                  </div>
+                  <div class="btn-group">
                     <button class="btn btn-success btn-sm" onclick="exportExcelCAuditApd()"><i class="far fa-file-excel"></i> Export Excel</button>
                   </div>
                 </div>

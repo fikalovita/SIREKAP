@@ -21,7 +21,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="#" class="h1"><b>e-Report</b></a>
+                <a href="#" class="h1"><b>SIREKAP</b></a>
 
                 <p>Rumah Sakit Islam Lumajang</p>
 

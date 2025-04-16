@@ -43,13 +43,15 @@
                 </div>
             </div>
             <!-- ./col -->
-            <div class="info-box bg-danger">
-                <span class="info-box-icon"><i class="fas fa-mobile-alt"></i></span>
-                <div class="info-box-content">
-                    <span class="info-box-text">IGD</span>
-                    <span class="info-box-number"><?= $jkn ?></span>
-                    <div class="progress">
-                        <div class="progress-bar" style="width: <?= $jkn ?>%"></div>
+            <div class="col-lg-3 col-6">
+                <div class="info-box bg-danger">
+                    <span class="info-box-icon"><i class="fas fa-mobile-alt"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">JKN</span>
+                        <span class="info-box-number"><?= $jkn ?></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: <?= $jkn ?>%"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,46 +3,43 @@
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3 id="ranap"><?= $ranap ?></h3>
-
-                        <p>Rawat Inap</p>
+                <div class="info-box bg-info">
+                    <span class="info-box-icon"><i class="fas fa-procedures"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Rawat Inap</span>
+                        <span class="info-box-number"><?= $ranap ?></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: <?= $ranap ?>%"></div>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-procedures"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3><?= $poli ?></h3>
-
-                        <p>Poliklinik</p>
+                <!-- info box -->
+                <div class="info-box bg-success">
+                    <span class="info-box-icon"><i class="fas fa-clinic-medical"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Poliklinik</span>
+                        <span class="info-box-number"><?= $poli ?></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: <?= $poli ?>%"></div>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-clinic-medical"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3><?= $igd ?></h3>
-
-                        <p>IGD</p>
+                <!-- info box -->
+                <div class="info-box bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-ambulance"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">IGD</span>
+                        <span class="info-box-number"><?= $igd ?></span>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: <?= $igd ?>%"></div>
+                        </div>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-ambulance"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

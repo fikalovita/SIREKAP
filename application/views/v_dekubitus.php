@@ -197,7 +197,23 @@
       let tanggal2 = $('#tanggal2').val();
 
       if (tanggal1 === '' || tanggal2 === '') {
-        alert('Tanggal wajib diisi!');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast',
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          background: '#17a2b8', // Warna latar belakang (green)
+          color: 'white'
+        });
+        Toast.fire({
+          icon: 'error',
+          title: 'Tanggal Harus di Isi',
+        })
         return;
       }
       tabelPenilaianDekubitus.ajax.reload();
@@ -224,7 +240,23 @@
       let tanggal4 = $('#tanggal4').val();
 
       if (tanggal3 === '' || tanggal4 === '') {
-        alert('Tanggal wajib diisi!');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast',
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          background: '#17a2b8', // Warna latar belakang (green)
+          color: 'white'
+        });
+        Toast.fire({
+          icon: 'error',
+          title: 'Tanggal Harus di Isi',
+        })
         return;
       }
       tabelKelengkapatanDekubitus.ajax.reload();
@@ -250,7 +282,23 @@
       let tanggal6 = $('#tanggal6').val();
 
       if (tanggal1 === '' || tanggal2 === '') {
-        alert('Tanggal wajib diisi!');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast',
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          background: '#17a2b8', // Warna latar belakang (green)
+          color: 'white'
+        });
+        Toast.fire({
+          icon: 'error',
+          title: 'Tanggal Harus di Isi',
+        })
         return;
       }
       tabelDekubitus.ajax.reload();
@@ -271,12 +319,28 @@
         },
       }
     })
-    $('#').on('click', function() {
+    $('#tampil-dekubitus').on('click', function() {
       let tanggal5 = $('#tanggal5').val();
       let tanggal6 = $('#tanggal6').val();
 
       if (tanggal5 === '' || tanggal6 === '') {
-        alert('Tanggal wajib diisi woi!');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          iconColor: 'white',
+          customClass: {
+            popup: 'colored-toast',
+          },
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          background: '#17a2b8', // Warna latar belakang (green)
+          color: 'white'
+        });
+        Toast.fire({
+          icon: 'error',
+          title: 'Tanggal Harus di Isi',
+        })
         return;
       }
       tabelDekubitus.ajax.reload();
@@ -289,7 +353,23 @@
     let tgl2 = $('#' + tanggalAkhirId).val();
 
     if (!tgl1 || !tgl2) {
-      alert('Tanggal wajib diisi');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        iconColor: 'white',
+        customClass: {
+          popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        background: '#17a2b8', // Warna latar belakang (green)
+        color: 'white'
+      });
+      Toast.fire({
+        icon: 'error',
+        title: 'Tanggal Harus di Isi',
+      })
       return;
     }
     window.location.href = `<?= base_url() ?>${controller}/export_excel/${tgl1}/${tgl2}`;
@@ -299,7 +379,23 @@
     let tanggal_3 = $('#tanggal3').val();
     let tanggal_4 = $('#tanggal4').val();
     if (tanggal_3 == '' && tanggal_4 == '') {
-      alert('Tanggal Wajib Di Isi');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        iconColor: 'white',
+        customClass: {
+          popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        background: '#17a2b8', // Warna latar belakang (green)
+        color: 'white'
+      });
+      Toast.fire({
+        icon: 'error',
+        title: 'Tanggal Harus di Isi',
+      })
     } else {
       let url = window.location.href = '<?= base_url('RekapanDekubitus/ExportExcelKelengkapanDekubitus/') ?>' + tanggal_3 + '/' + tanggal_4;
     }
@@ -310,7 +406,23 @@
     let tanggal_5 = $('#tanggal5').val();
     let tanggal_6 = $('#tanggal6').val();
     if (tanggal_5 == '' && tanggal_6 == '') {
-      alert('Tanggal Wajib Di Isi');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        iconColor: 'white',
+        customClass: {
+          popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        background: '#17a2b8', // Warna latar belakang (green)
+        color: 'white'
+      });
+      Toast.fire({
+        icon: 'error',
+        title: 'Tanggal Harus di Isi',
+      })
     } else {
       let url = window.location.href = '<?= base_url('RekapanDekubitus/ExportExcelRekapDekubitus/') ?>' + tanggal_5 + '/' + tanggal_6;
     }

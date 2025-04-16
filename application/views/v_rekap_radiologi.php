@@ -16,18 +16,22 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="col-6">
+            <div class="col-12">
               <div>
                 <div class="row">
-                  <div class="col">
-                    <input type="text" class="form-control form-control-sm" placeholder="Pilih Tanggal" id="tanggal1" name="tanggal1" required>
-                  </div>
-                  <div class="col">
-                    <input type="text" class="form-control form-control-sm" placeholder="Pilih Tanggal" id="tanggal2" name="tanggal2" required>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-info btn-sm" id="tampil-radiologi"><i class="fas fa-eye"></i> Tampilkan</button>
-                    <button class="btn btn-success btn-sm" onclick="exportExcel()"><i class="far fa-file-excel"></i> Export Excel</button>
+                  <div class="margin">
+                    <div class="btn-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Pilih Tanggal" id="tanggal1" name="tanggal1" required>
+                    </div>
+                    <div class="btn-group">
+                      <input type="text" class="form-control form-control-sm" placeholder="Pilih Tanggal" id="tanggal2" name="tanggal2" required>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn btn-info btn-sm" id="tampil-radiologi"><i class="fas fa-eye"></i> Tampilkan</button>
+                    </div>
+                    <div class="btn-group">
+                      <button class="btn btn-success btn-sm" onclick="exportExcel()"><i class="far fa-file-excel"></i> Export Excel</button>
+                    </div>
                   </div>
                 </div>
               </div>

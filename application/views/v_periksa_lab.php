@@ -101,7 +101,6 @@
     $('#button-export-excel').on('click', function() {
         exportExcel();
         $('#modalPLab').modal('hide');
-
     });
 
     let dataPeriksalab = $('#tabel-periksa-lab').DataTable({

@@ -43,17 +43,14 @@
                 </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-danger">
-                    <div class="inner">
-                        <h3><?= $jkn ?></h3>
-                        <p>JKN Mobile</p>
+            <div class="info-box bg-danger">
+                <span class="info-box-icon"><i class="fas fa-mobile-alt"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">IGD</span>
+                    <span class="info-box-number"><?= $jkn ?></span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: <?= $jkn ?>%"></div>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

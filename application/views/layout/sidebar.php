@@ -10,7 +10,6 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <!-- Additional navbar items can be added here -->
       </li>
       <!-- Logout Button -->
       <li class="nav-item">

@@ -195,24 +195,9 @@
     </div>
   </div>
 </section>
-
 <script>
   $(function() {
-    $("#tanggal1").datepicker({
-      dateFormat: "yy-mm-dd",
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
-    $("#tanggal2").datepicker({
-      dateFormat: "yy-mm-dd",
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
-    $("#tanggal3").datepicker({
+    $("#tanggal1, #tanggal2, #tanggal3").datepicker({
       dateFormat: "yy-mm-dd",
       changeMonth: true,
       changeYear: true

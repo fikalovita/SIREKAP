@@ -64,14 +64,7 @@
 </section>
 <script>
   $(function() {
-    $("#tanggal1").datepicker({
-      dateFormat: "yy-mm-dd",
-      changeMonth: true,
-      changeYear: true
-    });
-  });
-  $(function() {
-    $("#tanggal2").datepicker({
+    $("#tanggal1, #tanggal2").datepicker({
       dateFormat: "yy-mm-dd",
       changeMonth: true,
       changeYear: true

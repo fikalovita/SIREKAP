@@ -317,15 +317,14 @@
 </script>
 <script>
     $('#tampil-pasien-meninggal').on('click', function() {
-        let bulan3 = $('#bulan3').val();
-        let tahun3 = $('#tahun3').val();
 
         $.ajax({
             url: "<?= base_url('LaporanPasien/pasienMeninggal') ?>",
             type: "post",
             data: {
-                bulan3: bulan3,
-                tahun3: tahun3
+                bulan3: $('#bulan3').val(),
+                tahun3: $('#tahun3').val(),
+                lokasi: $('#lokasi').val()
             },
             dataType: "json",
             success: function(response) {
@@ -333,6 +332,19 @@
                     Swal.fire({
                         title: 'Jumlah Pasien Meninggal',
                         html: `<h1 style="color: red;">${response.jmlPxMati}</h1>`,
+                        icon: 'warning',
+                        iconColor: 'red',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'swal2-popup-custom',
+                            title: 'swal2-title-custom',
+                            confirmButton: 'swal2-confirm-custom'
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Jumlah Pasien Meninggal',
+                        html: `<h1 style="color: red;">0</h1>`,
                         icon: 'warning',
                         iconColor: 'red',
                         confirmButtonText: 'OK',

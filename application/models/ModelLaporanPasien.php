@@ -63,11 +63,17 @@ class ModelLaporanPasien extends CI_Model
     {
         $this->db->select('reg_periksa.no_rawat');
         $this->db->from('reg_periksa');
-        $this->db->where('reg_periksa.kd_poli', 'IGDK');
         $this->db->where('reg_periksa.stts', 'Meninggal');
-        $this->db->where('DATE_FORMAT(kamar_inap.tgl_keluar,"%Y-%m")=', '' . $tahun3 . '-' . $bulan3 . '');
+        $this->db->where('DATE_FORMAT(tgl_registrasi,"%Y-%m")=', '' . $tahun3 . '-' . $bulan3 . '');
         return $this->db->get();
     }
 
-    public function getPasienMatiIgd() {}
+    public function getPasienMatiIgd() {
+        $this->db->select('reg_periksa.no_rawat');
+        $this->db->from('reg_periksa');
+        $this->db->join('kamar_inap', 'reg_periksa.no_rawat = kamar_inap.no_rawat', 'left');
+        $this->db->where('reg_periksa.stts', 'Meninggal');
+        $this->db->where('DATE_FORMAT(tgl_registrasi,"%Y-%m")=', '' . $tahun3 . '-' . $bulan3 . '');
+        return $this->db->get();
+    }
 }

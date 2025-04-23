@@ -1,7 +1,19 @@
 <?php
 class ModelObatDPJP extends CI_Model
 {
-    public function getDokterDPJP()
+    public function getDokterDPJP($nmDokter)
+    {
+        $this->db->select('dokter.nm_dokter, dokter.kd_dokter');
+        $this->db->from('dokter');
+        $this->db->where('dokter.kd_dokter <>', '-');
+        $this->db->where('dokter.kd_dokter', $nmDokter);
+        $this->db->where('dokter.status', '1');
+
+
+        return $this->db->get();
+    }
+
+    public function getDokterDPJPFilter()
     {
         $this->db->select('dokter.nm_dokter, dokter.kd_dokter');
         $this->db->from('dokter');

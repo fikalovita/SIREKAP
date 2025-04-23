@@ -87,7 +87,7 @@
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="<?= base_url('ObatPerDokterRanap') ?>" class="nav-link">
+                <a href="<?= base_url('ObatPerDokter') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Obat Per Dokter Ranap</p>
                 </a>

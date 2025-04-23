@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
-class ObatPerDokterRanap extends CI_Controller
+class ObatPerDokter extends CI_Controller
 {
 	public function __construct()
 	{
@@ -21,7 +21,7 @@ class ObatPerDokterRanap extends CI_Controller
 	public function index()
 	{
 		$data['title'] = 'Obat Per Dokter Ranap';
-		$data['dokter'] = $this->ModelObatRalan->getDokter()->result();
+		$data['dokter'] = $this->ModelObatRalan->getDokterFilter()->result();
 		$this->load->view('layout/header');
 		$this->load->view('layout/sidebar', $data);
 		$this->load->view('v_obat_perdokter_ranap');
@@ -32,11 +32,12 @@ class ObatPerDokterRanap extends CI_Controller
 	{
 		$tanggal1 = $this->input->post('tanggal1');
 		$tanggal2 = $this->input->post('tanggal2');
-		$dokter = $this->input->post('dokter');
+		$dokter = $this->input->post('status');
 		$start = $this->input->post('start');
 		$length = $this->input->post('length');
 		$draw = $this->input->post('draw');
-		$dataDokter = $this->ModelObatRalan->getDokter()->result();
+
+		$dataDokter = $this->ModelObatRalan->getDokter($nmDokter)->result();
 		$recordTotal = ($dokter == '2')
 			? $this->ModelObatRalan->countDokterById($dokter)->num_rows()
 			: count($this->ModelObatDPJP->getDokterDPJP()->result());
@@ -183,12 +184,14 @@ class ObatPerDokterRanap extends CI_Controller
 		echo json_encode($datajson);
 	}
 
-	public function export_excel($tanggal1, $tanggal2, $dokter)
+	public function export_excel($tanggal1, $tanggal2, $status, $nmDokter)
 	{
+		$dataDokter = $this->ModelObatRalan->getDokter($nmDokter)->result();
+		$nm_dokter = $dataDokter[0]->nm_dokter;
 		set_time_limit(0);
 		ini_set('memory_limit', '-1');
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="rekap_obat_dokter_ranap.xlsx"');
+		header('Content-Disposition: attachment;filename="rekap_obat_dokter_jaga_' . $nm_dokter . '.xlsx"');
 		header('Cache-Control: max-age=0');
 		$spreadsheet = new Spreadsheet();
 		$activeWorksheet = $spreadsheet->getActiveSheet();
@@ -204,7 +207,7 @@ class ObatPerDokterRanap extends CI_Controller
 		// $writer = new Xlsx($spreadsheet);
 		$row = 2;
 		$no = 1;
-		$dataDokter = $this->ModelObatRalan->getDokter()->result();
+
 		$total = 0;
 		$total2 = 0;
 		$total3 = 0;
@@ -339,12 +342,14 @@ class ObatPerDokterRanap extends CI_Controller
 		];
 		echo json_encode($datajson);
 	}
-	public function export_excel_dpjp($tanggal1, $tanggal2, $dokter)
+	public function export_excel_dpjp($tanggal1, $tanggal2, $status, $nmDokter)
 	{
+		$dataDokter = $this->ModelObatDPJP->getDokterDPJP($nmDokter)->result();
+		$nm_dokter = $dataDokter[0]->nm_dokter;
 		set_time_limit(0);
 		ini_set('memory_limit', '-1');
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="rekap_obat_dokter_ranap.xlsx"');
+		header('Content-Disposition: attachment;filename="rekap_obat_dokter_DPJP_' . $nm_dokter . '.xlsx"');
 		header('Cache-Control: max-age=0');
 		$spreadsheet = new Spreadsheet();
 		$activeWorksheet = $spreadsheet->getActiveSheet();
@@ -363,12 +368,12 @@ class ObatPerDokterRanap extends CI_Controller
 		$total = 0;
 		$total2 = 0;
 		$total3 = 0;
-		$dataDokter = $this->ModelObatDPJP->getDokterDPJP()->result();
+		$dataDokter = $this->ModelObatDPJP->getDokterDPJP($nmDokter)->result();
 		foreach ($dataDokter as $d) {
 
 			$activeWorksheet->setCellValue('A' . $row, $no++);
 			$activeWorksheet->setCellValue('B' . $row, $d->nm_dokter);
-			$dataPasien = $this->ModelObatDPJP->getPasien($d->kd_dokter, $tanggal1, $tanggal2)->result();
+			$dataPasien = $this->ModelObatDPJP->getPasien($nmDokter, $tanggal1, $tanggal2)->result();
 			$row++;
 
 			foreach ($dataPasien as $px) {

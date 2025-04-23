@@ -1,25 +1,23 @@
 <?php
 class ModelObatRalan extends CI_Model
 {
-    public function getDokter()
+    public function getDokter($nmDokter)
     {
-
-        $this->db->select('dokter.nm_dokter,kd_dokter');
+        $this->db->select('dokter.nm_dokter,dokter.kd_dokter');
         $this->db->from('dokter');
         $this->db->where('dokter.kd_dokter <>', '-');
         $this->db->where('dokter.status', '1');
-
-
+        $this->db->where('dokter.kd_dokter', $nmDokter);
+        $this->db->order_by('dokter.nm_dokter', 'ASC');
         return $this->db->get();
     }
-
-    public function getDokterById($dokter)
+    public function getDokterFilter()
     {
-        $this->db->select('dokter.kd_dokter,dokter.nm_dokter');
+        $this->db->select('dokter.nm_dokter,dokter.kd_dokter');
         $this->db->from('dokter');
         $this->db->where('dokter.kd_dokter <>', '-');
         $this->db->where('dokter.status', '1');
-        $this->db->like('dokter.kd_dokter', $dokter);
+        $this->db->order_by('dokter.nm_dokter', 'ASC');
         return $this->db->get();
     }
     public function countDokterById($dokter)
@@ -31,14 +29,14 @@ class ModelObatRalan extends CI_Model
         $this->db->like('dokter.kd_dokter', $dokter);
         return $this->db->get();
     }
-    public function getPasien($kd_dokter, $tanggal1 = null, $tanggal2 = null)
+    public function getPasien($nmDokter, $tanggal1 = null, $tanggal2 = null)
     {
         $this->db->select('reg_periksa.no_rawat,pasien.nm_pasien');
         $this->db->from('reg_periksa');
         $this->db->join('pasien', 'reg_periksa.no_rkm_medis=pasien.no_rkm_medis', 'inner');
         $this->db->join('detail_pemberian_obat', 'reg_periksa.no_rawat=detail_pemberian_obat.no_rawat', 'inner');
         $this->db->where('detail_pemberian_obat.status', 'Ranap');
-        $this->db->where('reg_periksa.kd_dokter', $kd_dokter);
+        $this->db->where('reg_periksa.kd_dokter', $nmDokter);
         if (!empty($tanggal1) && !empty($tanggal2)) {
             $this->db->where('reg_periksa.tgl_registrasi >=', $tanggal1);
             $this->db->where('reg_periksa.tgl_registrasi <=', $tanggal2);

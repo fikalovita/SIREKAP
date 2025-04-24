@@ -60,6 +60,8 @@ class PeriksaLab  extends CI_Controller
                     $lab3 = "<table class='table table-borderless'><tr><td> $periksaLab->jml_periksa</td></tr></table>";
                     $lab5 = "<table class='table table-borderless'><tr><td>" . (!empty($periksaLab->laki) ? $periksaLab->laki : 0) . "</td></tr></table>";
                     $lab6 = "<table class='table table-borderless'><tr><td>" . (!empty($periksaLab->perempuan) ? $periksaLab->perempuan : 0) . "</td></tr></table>";
+                    $lab7 = "<table class='table table-borderless'><tr><td>" . (!empty($periksaLab->rata_periksa_laki) && is_numeric($periksaLab->rata_periksa_laki) ? round($periksaLab->rata_periksa_laki, 2) : 0) . "</td></tr></table>";
+                    $lab8 = "<table class='table table-borderless'><tr><td>" . (!empty($periksaLab->rata_periksa_laki) && is_numeric($periksaLab->rata_periksa_perempuan) ? round($periksaLab->rata_periksa_perempuan, 2) : 0) . "</td></tr></table>";
                 }
 
                 $template_lab = $this->ModelPemeriksaanLaborat->getTemplateLab($jnsPerawatanLab->kd_jenis_prw)->result();
@@ -70,6 +72,8 @@ class PeriksaLab  extends CI_Controller
                         $lab3 .= "<table class='table table-borderless'><tr><td>$detailPeriksa->jml_detail</td></tr></table>";
                         $lab5 .= "<table class='table table-borderless'><tr><td>" . (!empty($detailPeriksa->laki) ? $detailPeriksa->laki : 0) . "</td></tr></table>";
                         $lab6 .= "<table class='table table-borderless'><tr><td>" . (!empty($detailPeriksa->perempuan) ? $detailPeriksa->perempuan : 0) . "</td></tr></table>";
+                        $lab7 .= "<table class='table table-borderless'><tr><td>" . (!empty($detailPeriksa->rata_periksa_laki) && is_numeric($detailPeriksa->rata_periksa_laki) ? round($detailPeriksa->rata_periksa_laki, 2) : 0) . "</td></tr></table>";
+                        $lab8 .= "<table class='table table-borderless'><tr><td>" . (!empty($detailPeriksa->rata_periksa_laki) && is_numeric($detailPeriksa->rata_periksa_perempuan) ? round($detailPeriksa->rata_periksa_perempuan, 2) : 0) . "</td></tr></table>";
                     }
                 }
                 $row[] = $lab;
@@ -77,6 +81,8 @@ class PeriksaLab  extends CI_Controller
                 $row[] = $lab3;
                 $row[] = $lab5;
                 $row[] = $lab6;
+                $row[] = $lab7;
+                $row[] = $lab8;
                 $data[] = $row;
             }
         }
@@ -105,6 +111,8 @@ class PeriksaLab  extends CI_Controller
         $activeWorksheet->setCellValue('C1', 'Jumlah Pemeriksaan');
         $activeWorksheet->setCellValue('D1', 'Laki-Laki');
         $activeWorksheet->setCellValue('E1', 'Perempuan');
+        $activeWorksheet->setCellValue('F1', 'Rata-rata Periksa Laki-laki');
+        $activeWorksheet->setCellValue('G1', 'Rata-rata Periksa Perempuan');
         $row = 2;
         $jns_perawataan_lab = $this->ModelPemeriksaanLaborat->getJnsPerawatanAll()->result();
 
@@ -118,6 +126,8 @@ class PeriksaLab  extends CI_Controller
                     $activeWorksheet->setCellValue('C' . $row, $periksaLab->jml_periksa);
                     $activeWorksheet->setCellValue('D' . $row, (!empty($periksaLab->laki) ? $periksaLab->laki : 0));
                     $activeWorksheet->setCellValue('E' . $row, (!empty($periksaLab->perempuan) ? $periksaLab->perempuan : 0));
+                    $activeWorksheet->setCellValue('F' . $row, (!empty($periksaLab->rata_periksa_laki) && is_numeric($periksaLab->rata_periksa_laki) ? round($periksaLab->rata_periksa_laki, 2) : 0));
+                    $activeWorksheet->setCellValue('G' . $row, (!empty($periksaLab->rata_periksa_perempuan) && is_numeric($periksaLab->rata_periksa_perempuan) ? round($periksaLab->rata_periksa_perempuan, 2) : 0));
                 }
             } else {
                 $activeWorksheet->setCellValue('C' . $row, 0);
@@ -135,12 +145,16 @@ class PeriksaLab  extends CI_Controller
                         $activeWorksheet->setCellValue('C' . $row, $detailPeriksa->jml_detail);
                         $activeWorksheet->setCellValue('D' . $row, (!empty($detailPeriksa->laki) ? $detailPeriksa->laki : 0));
                         $activeWorksheet->setCellValue('E' . $row, (!empty($detailPeriksa->perempuan) ? $detailPeriksa->perempuan : 0));
+                        $activeWorksheet->setCellValue('F' . $row, (!empty($detailPeriksa->rata_periksa_laki) && is_numeric($detailPeriksa->rata_periksa_laki) ? round($detailPeriksa->rata_periksa_laki, 2) : 0));
+                        $activeWorksheet->setCellValue('G' . $row, (!empty($detailPeriksa->rata_periksa_perempuan) && is_numeric($detailPeriksa->rata_periksa_perempuan) ? round($detailPeriksa->rata_periksa_perempuan, 2) : 0));
                         $row++;
                     }
                 } else {
                     $activeWorksheet->setCellValue('C' . $row, 0);
                     $activeWorksheet->setCellValue('D' . $row, 0);
                     $activeWorksheet->setCellValue('E' . $row, 0);
+                    $activeWorksheet->setCellValue('F' . $row, 0);
+                    $activeWorksheet->setCellValue('G' . $row, 0);
                     $row++;
                 }
             }

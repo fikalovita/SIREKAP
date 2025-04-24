@@ -83,6 +83,8 @@
                                     <th>Jumlah Pemeriksaan</th>
                                     <th>Laki-Laki</th>
                                     <th>Perempuan</th>
+                                    <th>Rata-rata Periksa Laki-laki</th>
+                                    <th>Rata-rata Periksa Perempuan</th>
                                 </tr>
                             </thead>
                         </table>

@@ -24,13 +24,14 @@ class ModelPemeriksaanLaborat extends CI_Model
     public function getPeriksaLab($kd_jenis_prw, $tahun, $bulan)
     {
 
-        $this->db->select('count(kd_jenis_prw) as jml_periksa,
-        SUM(pasien.jk = "P" THEN 1 ELSE 0 END) as perempuan,
-        SUM(pasien.jk = "L" THEN 1 ELSE 0 END) as laki,
+        $this->db->select('
+        COUNT(kd_jenis_prw) as jml_periksa,
+        SUM(CASE WHEN pasien.jk = "P" THEN 1 ELSE 0 END) as perempuan,
+        SUM(CASE WHEN pasien.jk = "L" THEN 1 ELSE 0 END) as laki,
         COUNT(DISTINCT CASE WHEN pasien.jk = "P" THEN reg_periksa.no_rkm_medis END) as jml_pasien_perempuan,
-        COUNT(DISTINCT CASE WHEN pasien.jk = "L" THEN  reg_periksa.no_rkm_medis END) as jml_pasien_laki,
-        SUM(pasien.jk = "P" THEN 1 ELSE 0 END) / COUNT(DISTINCT CASE WHEN pasien.jk = "P" THEN reg_periksa.no_rkm_medis END) as rata_periksa_perempuan
-        SUM(pasien.jk = "L" THEN 1 ELSE 0 END) / COUNT(DISTINCT CASE WHEN pasien.jk = "L" THEN reg_periksa.no_rkm_medis END) as rata_periksa_laki');
+        COUNT(DISTINCT CASE WHEN pasien.jk = "L" THEN reg_periksa.no_rkm_medis END) as jml_pasien_laki,
+        (SUM(CASE WHEN pasien.jk = "P" THEN 1 ELSE 0 END) / COUNT(DISTINCT CASE WHEN pasien.jk = "P" THEN reg_periksa.no_rkm_medis END)) as rata_periksa_perempuan,
+        (SUM(CASE WHEN pasien.jk = "L" THEN 1 ELSE 0 END) / COUNT(DISTINCT CASE WHEN pasien.jk = "L" THEN reg_periksa.no_rkm_medis END)) as rata_periksa_laki');
         $this->db->from('periksa_lab');
         $this->db->join('reg_periksa', 'periksa_lab.no_rawat=reg_periksa.no_rawat', 'inner');
         $this->db->join('pasien', 'reg_periksa.no_rkm_medis=pasien.no_rkm_medis', 'left');
@@ -50,7 +51,14 @@ class ModelPemeriksaanLaborat extends CI_Model
 
     public function getDetailPeriksaLab($id_template, $bulan, $tahun)
     {
-        $this->db->select('count(id_template) as jml_detail,SUM(pasien.jk = "P") as perempuan,SUM(pasien.jk = "L") as laki');
+        $this->db->select('
+        COUNT(id_template) as jml_detail,
+        SUM(CASE WHEN pasien.jk = "P" THEN 1 ELSE 0 END) as perempuan,
+        SUM(CASE WHEN pasien.jk = "L" THEN 1 ELSE 0 END) as laki,
+        COUNT(DISTINCT CASE WHEN pasien.jk = "P" THEN reg_periksa.no_rkm_medis END) as jml_pasien_perempuan,
+        COUNT(DISTINCT CASE WHEN pasien.jk = "L" THEN reg_periksa.no_rkm_medis END) as jml_pasien_laki,
+        (SUM(CASE WHEN pasien.jk = "P" THEN 1 ELSE 0 END) / COUNT(DISTINCT CASE WHEN pasien.jk = "P" THEN reg_periksa.no_rkm_medis END)) as rata_periksa_perempuan,
+        (SUM(CASE WHEN pasien.jk = "L" THEN 1 ELSE 0 END) / COUNT(DISTINCT CASE WHEN pasien.jk = "L" THEN reg_periksa.no_rkm_medis END)) as rata_periksa_laki');
         $this->db->from('detail_periksa_lab');
         $this->db->join('reg_periksa', 'detail_periksa_lab.no_rawat=reg_periksa.no_rawat', 'inner');
         $this->db->join('pasien', 'reg_periksa.no_rkm_medis=pasien.no_rkm_medis', 'left');

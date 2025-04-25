@@ -158,6 +158,14 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="<?= base_url('RekapanTaskID') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Task ID</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>

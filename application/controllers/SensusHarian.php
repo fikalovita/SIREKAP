@@ -26,7 +26,15 @@ class SensusHarian extends CI_Controller
         foreach ($pxKeluar as $px) {
             $row = [];
             $row[] = $px->nm_dokter;
+            //lebih dari =48 jam
             $row[] = $px->lk;
+            $row[] = $px->pr;
         }
+
+        $data_json = [
+            'data' => $data
+        ];
+
+        echo json_encode($data_json);
     }
 }

@@ -14,7 +14,7 @@ class ModelSensusHarian extends CI_Model
             $this->db->where('kamar_inap.tgl_keluar >=', $tglKeluar1);
             $this->db->where('kamar_inap.tgl_keluar <=', $tglKeluar2);
         }
-        $this->db->where('TIMESTAMPDIFF(HOUR,CONCAT(kamar_inap.tgl_masuk," ",kamar_inap.jam_masuk),CONCAT(kamar_inap.tgl_keluar," ",kamar_inap.jam_keluar)>', '48');
+        $this->db->where('TIMESTAMPDIFF(HOUR,CONCAT(kamar_inap.tgl_masuk," ",kamar_inap.jam_masuk),CONCAT(kamar_inap.tgl_keluar," ",kamar_inap.jam_keluar)>=', '48');
         $this->db->group_by('dpjp_ranap.kd_dokter');
 
         return $this->db->get();

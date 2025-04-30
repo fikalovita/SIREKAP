@@ -38,4 +38,19 @@ class ModelSensusHarian extends CI_Model
 
         return $this->db->get();
     }
+
+    public function pasienMasuk($tglMasuk1, $tglMasuk2)
+    {
+        $this->db->select('count(reg_periksa.no_rawat) as jml_pasien_masuk, dokter.nm_dokter');
+        $this->db->from('reg_periksa');
+        $this->db->join('kamar_inap', 'reg_periksa.no_rawat=kamar_inap.no_rawat', 'left');
+        $this->db->join('dpjp_ranap', 'kamar_inap.no_rawat=dpjp_ranap.no_rawat', 'left');
+        $this->db->join('dokter', 'dpjp_ranap.kd_dokter=dokter.kd_dokter', 'inner');
+        if (!empty($tglMasuk1) && !empty($tglMasuk2)) {
+            $this->db->where('kamar_inap.tgl_masuk >=', $tglMasuk1);
+            $this->db->where('kamar_inap.tgl_masuk <=', $tglMasuk2);
+        }
+        $this->db->group_by('dokter.kd_dokter');
+        return $this->db->get();
+    }
 }

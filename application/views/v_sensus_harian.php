@@ -118,12 +118,12 @@
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <input class="form form-control" type="text" name="tglKeluar1" id="tglKeluar1" placeholder="--Pilih Tanggal--">
+                                                            <input class="form form-control" type="text" name="tglMasuk1" id="tglMasuk1" placeholder="--Pilih Tanggal--">
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="form-group">
-                                                            <input class="form form-control" type="text" name="tglKeluar2" id="tglKeluar2" placeholder="--Pilih Tanggal--">
+                                                            <input class="form form-control" type="text" name="tglMasuk2" id="tglMasuk2" placeholder="--Pilih Tanggal--">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button class="btn btn-primary" id="tampil-pasien-keluar">Tampilkan</button>
+                                            <button class="btn btn-primary" id="tampil-pasien-masuk">Tampilkan</button>
                                         </div>
                                     </div>
                                 </div>
@@ -141,13 +141,12 @@
                                     <div class="col-8 flex-wrap">
                                     </div>
                                 </div>
-                                <table class="table table-responsive-lg table-bordered" id="tabel-pasien-keluar">
+                                <table class="table table-responsive-lg table-bordered" id="tabel-pasien-masuk">
                                     <thead>
                                         <tr class="text-center">
                                             <th class="align-middle">Nama Dokter</th>
                                             <th>Jumlah Pasien Masuk</th>
                                         </tr>
-
                                     </thead>
                                 </table>
                             </div>
@@ -164,7 +163,7 @@
 </section>
 <script>
     $(function() {
-        $("#tglKeluar1, #tglKeluar2").datepicker({
+        $("#tglKeluar1, #tglKeluar2,#tglMasuk1, #tglMasuk2").datepicker({
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true
@@ -189,6 +188,24 @@
         $('#tampil-pasien-keluar').on('click', function() {
             tabelPasienKeluar.ajax.reload();
             $('#modalPxKeluar').modal('hide');
+        })
+
+        let tabelPasienMasuk = $('#tabel-pasien-masuk').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: false,
+            ajax: {
+                url: "<?= base_url('SensusHarian/dataPasienMasuk') ?>",
+                type: "post",
+                data: function(data) {
+                    data.tglMasuk1 = $('#tglMasuk1').val();
+                    data.tglMasuk2 = $('#tglMasuk2').val();
+                },
+            }
+        })
+        $('#tampil-pasien-masuk').on('click', function() {
+            tabelPasienMasuk.ajax.reload();
+            $('#modalPxMasuk').modal('hide');
         })
     });
 </script>

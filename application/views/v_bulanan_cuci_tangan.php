@@ -107,7 +107,7 @@
         showConfirmButton: false,
         timer: 1500,
         timerProgressBar: true,
-        background: '#17a2b8', // Warna latar belakang (green)
+        background: '#17a2b8',
         color: 'white'
       });
       Toast.fire({

@@ -54,8 +54,8 @@ class SensusHarian extends CI_Controller
 
     public function dataPasienMasuk()
     {
-        $tglMasuk1 = $this->input->post('tglMasuk1');
-        $tglMasuk2 = $this->input->post('tglMasuk2');
+        $tglMasuk1 = $this->input->post('tglMasuk1') ?: date('Y-m-d');
+        $tglMasuk2 = $this->input->post('tglMasuk2') ?: date('Y-m-d');
         $getPasienMasuk = $this->ModelSensusHarian->pasienMasuk($tglMasuk1, $tglMasuk2)->result();
 
         $data = [];
@@ -66,11 +66,14 @@ class SensusHarian extends CI_Controller
 
             $data[] = $row;
         }
-
         $data_json = [
             'data' => $data
         ];
 
         echo json_encode($data_json);
+    }
+
+    public function pasienAwal() {
+        
     }
 }

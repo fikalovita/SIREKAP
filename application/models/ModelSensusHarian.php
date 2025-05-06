@@ -53,4 +53,8 @@ class ModelSensusHarian extends CI_Model
         $this->db->group_by('dokter.kd_dokter');
         return $this->db->get();
     }
+
+    public function pasienAwal($bulan, $tahun) {
+        
+    }
 }

@@ -16,6 +16,6 @@ class Welcome extends CI_Controller
 		$data['igd'] = $this->Dashboard_Model->igd()->num_rows();
 		$data['ranap'] = $this->Dashboard_Model->rawatInap()->num_rows();
 
-		$this->load->view('index',$data);
+		$this->load->view('index', $data);
 	}
 }

@@ -10,6 +10,7 @@ class Auth extends CI_Controller
     }
     public function index()
     {
+        $data['title'] = 'LOGIN';
         $this->load->view('v_auth');
     }
 

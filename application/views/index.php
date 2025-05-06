@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>RS ISLAM LUMAJNG | Dashboard</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -28,13 +28,16 @@
     </div>
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
         <div class="container-fluid">
-            <a href="../../index3.html" class="navbar-brand">
+            <a href="<?= base_url('sirekap') ?>" class="navbar-brand">
                 <img src="<?= base_url('Assets/') ?>img/rsi-logo.jpg" alt="AdminLTE Logo" class="brand-image" width="30px">
                 <span class="brand-text font-weight-light"><strong>Dashboard Rumah Sakit Islam Lumajang</strong></span>
             </a>
             <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                 <li class="nav-item">
                     <span class="brand-text font-weight-light"><strong><?= date('d-F-Y') ?></strong></span>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= base_url('auth') ?>" class="btn btn-sm btn-info ml-3">Masuk</a>
                 </li>
             </ul>
         </div>
@@ -49,7 +52,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3 id="ranap"><?=$ranap?></h3>
+                                <h3 id="ranap"><?= $ranap ?></h3>
 
                                 <p>Rawat Inap</p>
                             </div>
@@ -64,7 +67,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3><?=$poli?></h3>
+                                <h3><?= $poli ?></h3>
 
                                 <p>Poliklinik</p>
                             </div>
@@ -79,7 +82,7 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3><?=$igd?></h3>
+                                <h3><?= $igd ?></h3>
 
                                 <p>IGD</p>
                             </div>
@@ -94,7 +97,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3><?=$jkn?></h3>
+                                <h3><?= $jkn ?></h3>
 
                                 <p>JKN Mobile</p>
                             </div>
@@ -106,14 +109,13 @@
                     </div>
                     <!-- ./col -->
                 </div>
-                
+
             </div>
         </section>
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer fixed-bottom">
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-        All rights reserved.
+        <strong>Copyright &copy; <?= date('Y') ?> <a href="https://rsislamlumajang.co.id/">RUMAH SAKIT ISLAM LUMAJANG</a>.</strong> All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 3.2.0
         </div>

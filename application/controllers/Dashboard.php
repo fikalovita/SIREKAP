@@ -21,7 +21,7 @@ class Dashboard extends CI_Controller
 		$data['statusKamar'] = $this->Dashboard_Model->statusKamar()->result();
 		$data['caraBayar'] = $this->Dashboard_Model->pasienPerCaraBayar()->result();
 		$data['title'] = 'Dashboard';
-		$this->load->view('layout/header');
+		$this->load->view('layout/header', $data);
 		$this->load->view('layout/sidebar', $data);
 		$this->load->view('v_dashboard', $data);
 		$this->load->view('layout/footer');

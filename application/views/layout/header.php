@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>RS ISLAM LUMAJANG | <?= $title ?></title>
     <link rel="icon" href="<?= base_url('Assets/') ?>img/rsi-logo.ico" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <script src="<?= base_url('Assets/') ?>js/jquery-3.7.1.min.js"></script>

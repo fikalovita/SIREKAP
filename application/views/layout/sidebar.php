@@ -37,7 +37,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('#') ?>" class="nav-link">
+            <a href="<?= base_url('SEPRajal') ?>" class="nav-link">
               <i class="fas fa-chart-line"></i>
               <p>Rawat Jalan</p>
               <i class="right fas fa-angle-left"></i>

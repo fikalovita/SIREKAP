@@ -60,7 +60,7 @@ class ModelCetakSEP extends CI_Model
         $this->db->from('reg_periksa');
         $this->db->join('bridging_sep', 'reg_periksa.no_rawat=bridging_sep.no_rawat', 'left');
         $this->db->where('bridging_sep.no_rawat', $no_rawat);
-
         return $this->db->get();
     }
+    
 }

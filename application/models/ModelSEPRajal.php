@@ -6,6 +6,7 @@ class ModelSEPRajal extends CI_Model
         $this->db->select('
             poliklinik.nm_poli,
             dokter.nm_dokter,
+            dokter.kd_dokter,
             SUM(CASE WHEN reg_periksa.kd_pj = "Bpj" THEN 1 ELSE 0 END) AS bpjs,
             SUM(CASE WHEN reg_periksa.kd_pj = "UM" THEN 1 ELSE 0 END) AS umum,
             SUM(CASE WHEN reg_periksa.kd_pj != "BPJ" AND reg_periksa.kd_pj != "UM" THEN 1 ELSE 0 END) AS lainnya,

@@ -22,14 +22,7 @@ class RekapSEP extends CI_Controller
 
     public function dataSEP()
     {
-        $tglSep1 = $this->input->post('tglSep1') ?: date('Y-m-d');
-        $tglSep2 = $this->input->post('tglSep2') ?: date('Y-m-d');
-        $start = $this->input->post('start');
-        $length = $this->input->post('length');
-        $draw = $this->input->post('draw');
-        $search = $this->input->post('search')['value'];
-        $dataPx = $this->ModelCetakSEP->getPasien($tglSep1, $tglSep2, $start, $length, $search)->result();
-        $recordTotal = $this->ModelCetakSEP->countPasien($tglSep1, $tglSep2, $search)->num_rows();
+        $dataPx = $this->ModelCetakSEP->getPasien()->result();
         $data = [];
         foreach ($dataPx as $sep) {
             $row = [];
@@ -47,6 +40,8 @@ class RekapSEP extends CI_Controller
             } else {
                 $row[] = '<span class="badge badge-danger">Belum SEP</span>';
             }
+
+
 
             $data[] = $row;
         }

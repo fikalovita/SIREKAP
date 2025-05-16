@@ -39,15 +39,17 @@
                   <th>No.Rawat</th>
                   <th>No.RM</th>
                   <th>Pasien</th>
+                  <th>Cara Bayar</th>
                   <th>Status Pasien</th>
-                  <th>Task ID 1</th>
-                  <th>Task ID 2</th>
-                  <th>Task ID 3</th>
-                  <th>Task ID 4</th>
-                  <th>Task ID 5</th>
-                  <th>Task ID 6</th>
-                  <th>Task ID 7</th>
-                  <th>Task ID 99</th>
+                  <th>SEP</th>
+                  <th>T1</th>
+                  <th>T2</th>
+                  <th>T3</th>
+                  <th>T4</th>
+                  <th>T5</th>
+                  <th>T6</th>
+                  <th>T7</th>
+                  <th>T99</th>
                 </tr>
               </thead>
             </table>
@@ -93,7 +95,7 @@
           render: function(data, type, row) {
             return data; // Pastikan data bisa menampilkan HTML
           },
-          width: "15%"
+          width: "10%"
         },
         {
           targets: 1, // Kolom 2
@@ -137,6 +139,14 @@
         },
         {
           targets: 11, // Kolom 12
+          width: "5%"
+        },
+        {
+          targets: 12, // Kolom 12
+          width: "5%"
+        },
+        {
+          targets: 13, // Kolom 12
           width: "5%"
         },
       ]

@@ -19,6 +19,8 @@ class Auth extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $authResult = $this->ModelAuth->auth($username, $password);
+        $authAdmin = $this->ModelAuth->admin($username, $password);
+        $admin = $authAdmin->row();
         $auth = $authResult->row();
         if ($authResult && $authResult->num_rows() > 0) {
             $data = [
@@ -29,6 +31,15 @@ class Auth extends CI_Controller
             ];
             $this->session->set_userdata($data);
 
+            redirect('dashboard');
+        } elseif ($authAdmin && $authAdmin->num_rows() > 0) {
+            $data = [
+                'isLogin' => true,
+                'admin_user' => $admin->usere,
+                'password_admin' => $admin->passworde,
+                'nama_pegawai' => 'SIMRS'
+            ];
+            $this->session->set_userdata($data);
             redirect('dashboard');
         } else {
             $this->session->set_flashdata('error', '<div class="alert table-danger" role="alert">

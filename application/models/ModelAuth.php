@@ -23,4 +23,22 @@ class ModelAuth extends CI_Model
 
         return $this->db->get();
     }
+
+    public function admin($username, $password)
+    {
+        $this->db->select('admin.usere, admin.passworde');
+        $this->db->from('admin');
+        $this->db->where(
+            'admin.usere',
+            "AES_ENCRYPT('$username', 'nur')",
+            false
+        );
+        $this->db->where(
+            'admin.passworde',
+            "AES_ENCRYPT('$password', 'windi')",
+            false
+        );
+
+        return $this->db->get();
+    }
 }

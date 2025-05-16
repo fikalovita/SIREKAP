@@ -93,7 +93,6 @@
                                 <th>No SEP</th>
                             </tr>
                         </thead>
-
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -145,7 +144,7 @@
             const kd_dokter = $(this).data('dokter');
 
             // Sekarang variabelnya sudah didefinisikan dan bisa dipakai
-            console.log("Kode dokter:", kd_dokter);
+            // console.log("Kode dokter:", kd_dokter);
 
             // Tampilkan modal
             $('#modalDokter').modal('show');

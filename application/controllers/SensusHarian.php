@@ -23,28 +23,26 @@ class SensusHarian extends CI_Controller
     {
         $tglKeluar1 = $this->input->post('tglKeluar1') ?: date('Y-m-d');
         $tglKeluar2 = $this->input->post('tglKeluar2') ?: date('Y-m-d');
+        $waktu = $this->input->post('waktu');
+        $data = [];
         $pxKeluar =  $this->ModelSensusHarian->pasienKeluar($tglKeluar1, $tglKeluar2)->result();
         $pxKeluar2 =  $this->ModelSensusHarian->pasienKeluar2($tglKeluar1, $tglKeluar2)->result();
-        $data = [];
-        foreach ($pxKeluar as $px) {
-            $row = [];
-            $nm_dokter = $px->nm_dokter;
-            $laki1 = $px->lk; // lebih 48 jam
-            $pr1 = $px->pr;
-            $laki2 = 0;
-            $pr2 = 0;
-            foreach ($pxKeluar2 as $px2) {
-                if ($px2->nm_dokter == $nm_dokter) {
-                    $laki2 = $px2->lk;
-                    $pr2 = $px2->pr;
-                }
+        if ($waktu == '1') {
+            foreach ($pxKeluar as $px) {
+                $row = [];
+                $row[] = $px->nm_dokter;
+                $row[] = $px->lk;
+                $row[] = $px->pr;
+                $data[] = $row;
             }
-            $row[] = $nm_dokter;
-            $row[] = $laki2;
-            $row[] = $laki1;
-            $row[] = $pr2;
-            $row[] = $pr1;
-            $data[] = $row;
+        } elseif ($waktu == '2') {
+            foreach ($pxKeluar2 as $px2) {
+                $row = [];
+                $row[] = $px2->nm_dokter;
+                $row[] = $px2->lk;
+                $row[] = $px2->pr;
+                $data[] = $row;
+            }
         }
         $data_json = [
             'data' => $data
@@ -73,7 +71,5 @@ class SensusHarian extends CI_Controller
         echo json_encode($data_json);
     }
 
-    public function pasienAwal() {
-        
-    }
+    public function pasienAwal() {}
 }

@@ -15,7 +15,7 @@ class RekapanTaskID extends CI_Controller
     public function index()
     {
         $data['title'] = 'Rekapan Antrian Online (TASK ID)';
-        $this->load->view('layout/header');
+        $this->load->view('layout/header', $data);
         $this->load->view('layout/sidebar', $data);
         $this->load->view('v_taskid');
         $this->load->view('layout/footer');

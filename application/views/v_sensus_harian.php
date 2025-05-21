@@ -17,7 +17,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="card">
                             <div class="card-header">
-                                Sensus Harian Pasien Keluar
+                                Sensus Harian Pasien Keluar Mati
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modalPxKeluar">
                                         <i class="fas fa-filter"></i>
@@ -52,6 +52,15 @@
                                                             <input class="form form-control" type="text" name="tglKeluar2" id="tglKeluar2" placeholder="--Pilih Tanggal--">
                                                         </div>
                                                     </div>
+                                                    <div class="col">
+                                                        <div class="form-group">
+                                                            <select class="custom-select" name="waktu" id="waktu">
+                                                                <option selected>--Pilih Waktu--</option>
+                                                                <option value="1">Kurang dari 48 jam</option>
+                                                                <option value="2">Lebih dari 48 jam</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -70,15 +79,9 @@
                                 <table class="table table-responsive-lg table-bordered table-sm" id="tabel-pasien-keluar">
                                     <thead>
                                         <tr class="text-center">
-                                            <th rowspan="2" class="align-middle">Nama Dokter</th>
-                                            <th colspan="2">Jumlah Pasien Keluar Pria</th>
-                                            <th colspan="2">Jumlah Pasien Keluar Wanita</th>
-                                        </tr>
-                                        <tr class="text-center">
-                                            <th> Kurang 48 Jam </th>
-                                            <th> lebih 48 Jam</th>
-                                            <th> Kurang 48 Jam </th>
-                                            <th> lebih 48 Jam</th>
+                                            <th class="align-middle">Nama Dokter</th>
+                                            <th>Jumlah Pasien Keluar Mati Pria</th>
+                                            <th>Jumlah Pasien Keluar Mati Wanita</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -248,6 +251,7 @@
                 data: function(data) {
                     data.tglKeluar1 = $('#tglKeluar1').val();
                     data.tglKeluar2 = $('#tglKeluar2').val();
+                    data.waktu = $('#waktu').val();
                 },
             }
         })

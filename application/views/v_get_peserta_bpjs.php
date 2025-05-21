@@ -43,7 +43,7 @@
             e.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: 'http://192.168.1.144/dashboard/ApiBpjs/getPeserta',
+                url: 'http://192.168.1.144/SIREKAP/ApiBpjs/getPeserta',
                 type: 'POST',
                 data: formData,
                 success: function(response) {

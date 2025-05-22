@@ -3,10 +3,22 @@ class ModelSEPRajal extends CI_Model
 {
     public function getPoliklinik($tglSepRajal1, $tglSepRajal2, $search = "")
     {
+        $hari = date('l');
+        $hariIndo = [
+            'Sunday'    => 'Akhad',
+            'Monday'    => 'Senin',
+            'Tuesday'   => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday'  => 'Kamis',
+            'Friday'    => 'Jumat',
+            'Saturday'  => 'Sabtu'
+        ];
+        $hariSekarang = $hariIndo[$hari];
         $this->db->select('
             poliklinik.nm_poli,
             dokter.nm_dokter,
             dokter.kd_dokter,
+            CONCAT(jadwal.jam_mulai,"-",jadwal.jam_selesai) as jam_kerja,
             SUM(CASE WHEN reg_periksa.kd_pj = "Bpj" THEN 1 ELSE 0 END) AS bpjs,
             SUM(CASE WHEN reg_periksa.kd_pj = "UM" THEN 1 ELSE 0 END) AS umum,
             SUM(CASE WHEN reg_periksa.kd_pj != "BPJ" AND reg_periksa.kd_pj != "UM" THEN 1 ELSE 0 END) AS lainnya,
@@ -16,7 +28,9 @@ class ModelSEPRajal extends CI_Model
         $this->db->join('poliklinik', 'reg_periksa.kd_poli=poliklinik.kd_poli', 'inner');
         $this->db->join('dokter', 'reg_periksa.kd_dokter=dokter.kd_dokter', 'left');
         $this->db->join('bridging_sep', 'reg_periksa.no_rawat=bridging_sep.no_rawat', 'left');
+        $this->db->join('jadwal', 'dokter.kd_dokter=jadwal.kd_dokter', 'left');
         $this->db->where('poliklinik.kd_poli<>', 'IGDK');
+        $this->db->where('hari_kerja', $hariSekarang);
         if (!empty($search)) {
             $this->db->group_start();
             $this->db->like('dokter.nm_dokter', $search);

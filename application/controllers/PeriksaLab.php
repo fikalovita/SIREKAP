@@ -31,7 +31,6 @@ class PeriksaLab  extends CI_Controller
         $bulan = $this->input->post('bulan4') ?: '';
         $tahun = $this->input->post('tahun4') ?: '';
         $draw = $this->input->post('draw');
-
         if (empty($bulan) || empty($tahun)) {
             echo json_encode([
                 'draw' => $draw,

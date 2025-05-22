@@ -56,6 +56,7 @@
                                     <th>Action</th>
                                     <th>Poliklinik</th>
                                     <th>Dokter</th>
+                                    <th>Jam</th>
                                     <th>SEP Tercetak</th>
                                     <th>BPJS</th>
                                     <th>Umum</th>
@@ -124,8 +125,7 @@
             data: function(data) {
                 data.tglSepRajal1 = $('#tglSepRajal1').val();
                 data.tglSepRajal2 = $('#tglSepRajal2').val();
-                // data.kd_dokter = kd_dokter;
-
+                // data.kd_dokter = kd_dokter
             }
         }
     })

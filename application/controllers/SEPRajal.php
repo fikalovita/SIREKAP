@@ -37,6 +37,7 @@ class SEPRajal extends CI_Controller
             </div>';
             $row[] = $sep->nm_poli;
             $row[] = $sep->nm_dokter;
+            $row[] = $sep->jam_kerja;
             $row[] = $sep->jumlah_sep;
             $row[] = $sep->bpjs;
             $row[] = $sep->umum;

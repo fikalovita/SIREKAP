@@ -6,7 +6,7 @@ class ApiBpjs extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('curl');
+        // $this->load->library('curl');
         if (!$this->session->userdata('isLogin')) {
             redirect('Auth');
         }

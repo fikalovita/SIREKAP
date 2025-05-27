@@ -35,6 +35,7 @@ class SEPRajal extends CI_Controller
                     <i class="fas fa-eye"></i>
                 </button>
             </div>';
+            //tambah jam kerja
             $row[] = $sep->nm_poli;
             $row[] = $sep->nm_dokter;
             $row[] = $sep->jam_kerja;

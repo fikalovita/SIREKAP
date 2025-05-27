@@ -3,6 +3,7 @@ class ModelSensusHarian extends CI_Model
 {
     public function pasienKeluar($tglKeluar1, $tglKeluar2)
     {
+        //mengubah filter berdasarkan status pulang 'Meninggal' dan filter waktu meninggal kurang dari 48 jam
         $this->db->select('kamar_inap.no_rawat, dokter.nm_dokter, pasien.jk, dpjp_ranap.no_rawat, reg_periksa.no_rkm_medis, SUM(CASE WHEN pasien.jk = "P" THEN 1 ELSE 0 END) as pr, SUM(CASE WHEN pasien.jk = "L" THEN 1 ELSE 0 END) as lk');
         $this->db->from('reg_periksa');
         $this->db->join('pasien', 'reg_periksa.no_rkm_medis = pasien.no_rkm_medis', 'left');
@@ -22,6 +23,7 @@ class ModelSensusHarian extends CI_Model
 
     public function pasienKeluar2($tglKeluar1, $tglKeluar2)
     {
+        //mengubah filter berdasarkan status pulang 'Meninggal' dan filter waktu meninggal lebih dari 48 jam
         $this->db->select('kamar_inap.no_rawat, dokter.nm_dokter, pasien.jk, dpjp_ranap.no_rawat, reg_periksa.no_rkm_medis, SUM(pasien.jk = "P") as pr, SUM(pasien.jk = "L") as lk');
         $this->db->from('reg_periksa');
         $this->db->join('pasien', 'reg_periksa.no_rkm_medis=pasien.no_rkm_medis', 'left');

@@ -52,6 +52,7 @@
                     <div class="card-body">
                         <table class="table table-responsive-lg table-bordered table-sm" id="tabel-sep-rajal">
                             <thead>
+                                <!-- Tambah kolom jam -->
                                 <tr class="text-center">
                                     <th>Action</th>
                                     <th>Poliklinik</th>
@@ -84,6 +85,7 @@
                 <div class="modal-body">
                     <table class="table table-sm table-responsive-lg table-bordered table-sm" id="tabel-data-sep2">
                         <thead>
+
                             <tr class="text-center">
                                 <th>No Rawat</th>
                                 <th>No.RM</th>

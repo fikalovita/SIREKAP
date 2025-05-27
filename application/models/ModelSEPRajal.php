@@ -3,6 +3,7 @@ class ModelSEPRajal extends CI_Model
 {
     public function getPoliklinik($tglSepRajal1, $tglSepRajal2, $search = "")
     {
+        //menambah query menampilkan jam praktek
         $hari = date('l');
         $hariIndo = [
             'Sunday'    => 'Akhad',

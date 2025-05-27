@@ -53,6 +53,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col">
+                                                        <!-- menambah filter pilih waktu pada modal filter -->
                                                         <div class="form-group">
                                                             <select class="custom-select" name="waktu" id="waktu">
                                                                 <option selected>--Pilih Waktu--</option>

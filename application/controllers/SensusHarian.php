@@ -21,6 +21,7 @@ class SensusHarian extends CI_Controller
     }
     public function dataPasienKeluar()
     {
+        //menambah percabangan berdasarkan waktu pasien meninggal
         $tglKeluar1 = $this->input->post('tglKeluar1') ?: date('Y-m-d');
         $tglKeluar2 = $this->input->post('tglKeluar2') ?: date('Y-m-d');
         $waktu = $this->input->post('waktu');

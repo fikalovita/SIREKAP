@@ -83,7 +83,7 @@
                             <tbody>
                                 <?php foreach ($statusKamar as $sk): ?>
                                     <tr>
-                                        <td><?= $sk->nm_bangsal ?></td>
+                                        <td><?= $sk->nama_group ?></td>
                                         <td><?= $sk->jumlah_kmr ?></td>
                                         <td><?= $sk->kmr_isi ?></td>
                                         <td><?= $sk->kmr_kosong ?></td>

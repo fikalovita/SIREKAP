@@ -22,10 +22,20 @@
       <img src="<?= base_url('Assets/') ?>img/rsi.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">SIREKAP</span>
     </a>
-    <div class="sidebar" style="overflow-y: auto; height: 100vh;">
+    <div class="sidebar">
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
           <a href="#" class="d-block"><?= $this->session->userdata('nama_pegawai') ?></a>
+        </div>
+      </div>
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
         </div>
       </div>
       <nav class="mt-2">
@@ -37,37 +47,34 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('SEPRajal') ?>" class="nav-link">
-              <i class="fas fa-chart-line"></i>
-              <p>Rawat Jalan</p>
-              <i class="right fas fa-angle-left"></i>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-chart-line"></i>
               <p>
-                Laporan
-                <i class="right fas fa-angle-left"></i>
+                Rekam Medis
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="<?= base_url('rekapanauditapd') ?>" class="nav-link">
+                <a href="<?= base_url('StatusRM') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Audit APD</p>
+                  <p>Status RM</p>
                 </a>
               </li>
+            </ul>
+            <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="<?= base_url('rekapanRadiologi') ?>" class="nav-link">
+                <a href="<?= base_url('DemografiRegistrasi') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Radiologi</p>
+                  <p>Demografi Registrasi</p>
                 </a>
               </li>
+            </ul>
+            <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="<?= base_url('rekapanCuciTangan') ?>" class="nav-link">
+                <a href="<?= base_url('DiagnosaPasienPerUmur') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Cuci Tangan</p>
+                  <p>Diagnosa Pasien</p>
                 </a>
               </li>
             </ul>
@@ -76,7 +83,142 @@
             <a href="#" class="nav-link">
               <i class="fas fa-chart-line"></i>
               <p>
-                Laporan Obat
+                Pasien
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('LaporanPasien') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jumlah Pasien Per-Dokter</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('SensusHarian') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sensur Harian Pasien</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('RekapRujukan') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Rujukan Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>
+                Rawat Jalan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('SEPRajal') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pasien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>
+                Rawat Inap
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('RekapanRanap') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pasien Ranap</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('RekapanRanapKamar') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kamar Inap</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>
+                IGD/UGD
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="<?= base_url('RekapIGDJumlahPasien') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Pasien</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="<?= base_url('RekapIGD') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Indikator Triase</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('rekapanRadiologi') ?>" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>Radiologi</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>
+                PPI
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('rekapanAuditAPD') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Audit APD</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('rekapanCuciTangan') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cuci Tangan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('RekapanSurveilanceOperasi1') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Surveilance Operasi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('RekapanDekubitus') ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Dekubitus</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <p>
+                Farmasi
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -88,49 +230,6 @@
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-chart-line"></i>
-              <p>
-                Laporan Pasien
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" style="display: none;">
-              <li class="nav-item">
-                <a href="<?= base_url('LaporanPasien') ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jumlah Pasien Per Dokter</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-chart-line"></i>
-              <p>
-                Rekap Operasi
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" style="display: none;">
-              <li class="nav-item">
-                <a href="<?= base_url('RekapanSurveilanceOperasi1') ?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Surveilance Operasi</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('RekapanDekubitus') ?>" class="nav-link">
-              <i class="fas fa-chart-line"></i>
-              <p>
-                Rekap Dekubitus
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -150,15 +249,6 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('SensusHarian') ?>" class="nav-link">
-              <i class="fas fa-chart-line"></i>
-              <p>
-                Sensus Harian Pasien
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-chart-line"></i>
               <p>
@@ -168,7 +258,7 @@
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-                <a href="<?= base_url('apiBpjs') ?>" class="nav-link">
+                <a href="<?= base_url('ApiBpjs') ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Get Peserta</p>
                 </a>
@@ -196,3 +286,18 @@
           </div>
         </div>
     </section>
+    <script>
+      $(document).ready(function() {
+        var currentUrl = window.location.origin + window.location.pathname;
+        $('.nav-sidebar a').each(function() {
+          if (this.href === currentUrl) {
+            $(this).addClass('active');
+            var treeview = $(this).closest('.nav-treeview');
+            if (treeview.length) {
+              var parent = treeview.closest('.nav-item');
+              parent.children('.nav-link').addClass('active');
+            }
+          }
+        });
+      });
+    </script>

@@ -150,6 +150,7 @@
 
             // Tampilkan modal
             $('#modalDokter').modal('show');
+            //menghapus inisialisasi dataTable
             if ($.fn.dataTable.isDataTable('#tabel-data-sep2')) {
                 $('#tabel-data-sep2').DataTable().clear().destroy();
             }

@@ -60,13 +60,30 @@ class Dashboard_Model extends CI_Model
         return $this->db->get();
     }
 
+    // public function statusKamar()
+    // {
+    //     $this->db->select("bangsal.nm_bangsal,count(kamar.kd_bangsal) AS jumlah_kmr,SUM(kamar.status='ISI') AS kmr_isi,SUM(kamar.status='KOSONG') AS kmr_kosong, kamar.kelas");
+    //     $this->db->from("kamar");
+    //     $this->db->join("bangsal", "kamar.kd_bangsal = bangsal.kd_bangsal");
+    //     $this->db->where("statusdata ='1'");
+    //     $this->db->group_by("kamar.kd_bangsal");
+
+    //     return $this->db->get();
+    // }
     public function statusKamar()
     {
-        $this->db->select("bangsal.nm_bangsal,count(kamar.kd_bangsal) AS jumlah_kmr,SUM(kamar.status='ISI') AS kmr_isi,SUM(kamar.status='KOSONG') AS kmr_kosong, kamar.kelas");
+        $this->db->select("
+        CASE
+            WHEN bangsal.nm_bangsal LIKE 'RUANG ISOLASI%' THEN 'RUANG ISOLASI'
+            WHEN bangsal.nm_bangsal LIKE 'RUANGAN ISOLASI%' THEN 'RUANG ISOLASI'
+            ELSE SUBSTRING_INDEX(bangsal.nm_bangsal, ' ', 1)
+        END AS nama_group, 
+        COUNT(kamar.kd_bangsal) AS jumlah_kmr, SUM(kamar.status='ISI') AS kmr_isi, 
+        SUM(kamar.status='KOSONG') AS kmr_kosong, kamar.kelas");
         $this->db->from("kamar");
         $this->db->join("bangsal", "kamar.kd_bangsal = bangsal.kd_bangsal");
         $this->db->where("statusdata ='1'");
-        $this->db->group_by("kamar.kd_bangsal");
+        $this->db->group_by("nama_group, kamar.kelas");
 
         return $this->db->get();
     }

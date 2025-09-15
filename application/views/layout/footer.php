@@ -7,14 +7,13 @@
 </footer>
 <aside class="control-sidebar control-sidebar-dark">
 </aside>
-<!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-<!-- jQuery -->
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script src="<?= base_url('Assets/') ?>plugins/moment/moment.min.js"></script>
+<script src="<?= base_url('Assets/') ?>plugins/daterangepicker/daterangepicker.js"></script>
 <script src="<?= base_url('Assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
+<script src="<?= base_url('Assets/') ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="<?= base_url('Assets/') ?>js/adminlte.js"></script>
+<!-- <script src="<?= base_url('Assets/') ?>other/sidebar-menu.js"></script> -->
 
 </body>
 

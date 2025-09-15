@@ -16,8 +16,12 @@
     <link href="<?= base_url('Assets/') ?>css/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('Assets/') ?>plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="<?= base_url('Assets/') ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url('Assets/') ?>plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="<?= base_url('Assets/') ?>css/adminlte.min.css">
     <link rel="stylesheet" href="<?= base_url('Assets/') ?>css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<?= base_url('Assets/') ?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+
+    <!-- <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed"> -->
